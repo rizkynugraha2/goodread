@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\BooksControllers;
-use App\Models\Category;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\BooksControllers;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +46,6 @@ Route::get('/authors', function()
         'authors' => User::all()
     ]);
 });
+
+Route::get('/login', [LoginController::class, 'index']);
+Route::get('/register', [RegisterController::class, 'index']);
