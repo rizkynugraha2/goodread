@@ -17,9 +17,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [BooksControllers::class, 'index']);
+Route::get('/', function()
+{
+    return view('home', [
+        'title' => 'Welcome'
+    ]);
+});
 
-Route::get('/posts/{slug}', [BooksControllers::class, 'show']);
+Route::get('/posts', [BooksControllers::class, 'index']);
+
+Route::get('/posts{slug:slug}', [BooksControllers::class, 'show']);
+
 
 Route::get('/categories', function()
 {
@@ -29,7 +37,7 @@ Route::get('/categories', function()
     ]);
 });
 
-Route::get('authors', function()
+Route::get('/authors', function()
 {
     return view('authors', [
         'title' => 'Authors',

@@ -12,27 +12,27 @@ class BooksControllers extends Controller
     
     
     public function index(){
-        $title = '';
+        $title = " ";
         if(request('category')){
             $category = Category::firstWhere('slug', request('category'));
-            $title = 'in' . $category;
+            $title = ' in '  . $category->name;
         }
         
         if(request('author')){
             $author = User::firstWhere('username', request('author'));
-            $title = ' by ' . $author;
+            $title = ' by ' . $author->name;
         }
         return view('posts', [
-            'title' => 'GoodRead',
-            'posts' => Book::latest()->filter(request(['search', 'category' , 'author']))->paginate(5)->withQueryString()
+            'title' => 'GoodRead'. $title,
+            'posts' => Book::latest()->filter(request(['search', 'category' , 'author']))->paginate(6)->withQueryString()
         ]);
     }
     
-    public function show(Book $slug)
+    public function show(Book $post)
     {
         return view('post',[
             "title" => 'Child',
-            "post" => $slug
+            "post" => $post
         ]);
     }
 }
