@@ -26,7 +26,7 @@ Route::get('/', function()
 
 Route::get('/posts', [BooksControllers::class, 'index']);
 
-Route::get('/posts{slug:slug}', [BooksControllers::class, 'show']);
+Route::get('/posts/{post:slug}', [BooksControllers::class, 'show']);
 
 
 Route::get('/categories', function()
