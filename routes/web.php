@@ -19,14 +19,14 @@ use App\Http\Controllers\RegisterController;
 */
 
 
-Route::get('/', function()
-{
-    return view('home', [
-        'title' => 'Welcome'
-    ]);
-});
+// Route::get('/', function()
+// {
+//     return view('home', [
+//         'title' => 'Welcome'
+//     ]);
+// });
 
-Route::get('/posts', [BooksControllers::class, 'index']);
+Route::get('/posts', [BooksControllers::class, 'index'])->middleware('auth');
 
 Route::get('/posts/{post:slug}', [BooksControllers::class, 'show']);
 
@@ -37,15 +37,20 @@ Route::get('/categories', function()
         'title' => 'Categories',
         'categories' => Category::all()
     ]);
-});
+})->middleware('auth');
 
 Route::get('/authors', function()
 {
     return view('authors', [
         'title' => 'Authors',
         'authors' => User::all()
-    ]);
-});
+        ]);
+    })->middleware('auth');
 
-Route::get('/login', [LoginController::class, 'index']);
-Route::get('/register', [RegisterController::class, 'index']);
+Route::get('/', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
+
+
+Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
+Route::post('/register', [RegisterController::class, 'store']);
