@@ -22,6 +22,7 @@
     <div class="row">
         @foreach($posts as $post)
         <div class="col-md-4 mb-5 mt-4">
+
             <a href="/posts/{{$post->slug}}" class="text-decoration-none text-white m-3">
                 <div class="card text-white bg-dark mb-3">
                     <div>{{ $post->category->name  }}</div>

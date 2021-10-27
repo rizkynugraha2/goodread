@@ -28,7 +28,7 @@ use App\Http\Controllers\RegisterController;
 
 Route::get('/posts', [BooksControllers::class, 'index'])->middleware('auth');
 
-Route::get('/posts/{post:slug}', [BooksControllers::class, 'show']);
+Route::get('/posts/{post:slug}', [BooksControllers::class, 'show'])->name('posts.index');
 
 
 Route::get('/categories', function()
